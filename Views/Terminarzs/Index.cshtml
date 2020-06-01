@@ -1,0 +1,70 @@
+﻿@model PagedList.IPagedList<PingPong7.Models.Terminarz>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+<br>
+<br>
+
+@*Html.BeginForm run the HOME controller InvoiceList Action's GET method when form get submitted.*@
+@using (Html.BeginForm("Index", "Home", FormMethod.Get, new { id = "form1" }))
+
+{
+<div id='Paging' style="text-align: center">
+    @*Dorpdownlist generation code*@
+
+
+
+    <h3>
+        Kolejka @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        z @Model.PageCount
+    </h3>
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.psize }))
+</div>
+}
+<table class="table">
+    <tr>
+        <th style="text-align: right">
+            @Html.DisplayName("Gospodarze")
+        </th>
+        <th style="text-align: center">
+            @Html.DisplayName("Wynik meczu")
+        </th>
+        <th>
+            @Html.DisplayName("Goscie")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align: right">
+                @Html.DisplayFor(modelItem => item.TeamName)
+            </td>
+            <td style="text-align: center">
+                @Html.DisplayFor(modelItem => item.Wynik)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamName1)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id_terminarz }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id_terminarz }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id_terminarz })
+            </td>
+        </tr>
+    }
+
+</table>
+<script type="text/javascript">
+
+    $(function () {
+        $("#pageSize").change(function () {
+            alert("abc");
+            $("#form1").submit();
+        });
+    });
+</script>
+

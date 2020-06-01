@@ -1,0 +1,2 @@
+﻿Enable-Migrations -ContextTypeName PingPong7Context -MigrationsDirectory Migrations\PingPong7
+add-migration -configurationTypeName CoreFirstPrimer.Migrations.PingPong7.Configuration "InitialCreate"

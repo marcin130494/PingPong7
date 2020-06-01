@@ -1,0 +1,39 @@
+﻿@model PingPong7.Models.Terminarz
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Gospodarze")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Wynik meczu:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wynik)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Goście")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamName1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_terminarz }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

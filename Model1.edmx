@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="LoginId" />
+          </Key>
+          <Property Name="LoginId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="Role" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ListaRankingowas">
+          <Key>
+            <PropertyRef Name="ListarankingowaId" />
+          </Key>
+          <Property Name="ListarankingowaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Punkty" Type="int" Nullable="false" />
+          <Property Name="PlayerkId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tabelas">
+          <Key>
+            <PropertyRef Name="TableId" />
+          </Key>
+          <Property Name="TableId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rozegrano" Type="int" Nullable="false" />
+          <Property Name="Wygrane" Type="int" Nullable="false" />
+          <Property Name="Zremisowane" Type="int" Nullable="false" />
+          <Property Name="Przegrane" Type="int" Nullable="false" />
+          <Property Name="Punkty" Type="int" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Terminarzs">
+          <Key>
+            <PropertyRef Name="Id_terminarz" />
+          </Key>
+          <Property Name="Id_terminarz" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="128" />
+          <Property Name="Wynik" Type="nvarchar(max)" />
+          <Property Name="TeamName1" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Zawodniks">
+          <Key>
+            <PropertyRef Name="PlayerkId" />
+          </Key>
+          <Property Name="PlayerkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imie" Type="nvarchar(max)" />
+          <Property Name="Nazwisko" Type="nvarchar(max)" />
+          <Property Name="Wygrane" Type="int" Nullable="false" />
+          <Property Name="Przegrane" Type="int" Nullable="false" />
+          <Property Name="TeamName" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Zespols">
+          <Key>
+            <PropertyRef Name="TeamName" />
+          </Key>
+          <Property Name="TeamName" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Klub" Type="nvarchar(max)" />
+          <Property Name="Ulica" Type="nvarchar(max)" />
+          <Property Name="Telefon" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_ListaRankingowas_dbo_Zawodniks_PlayerkId">
+          <End Role="Zawodniks" Type="Self.Zawodniks" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ListaRankingowas" Type="Self.ListaRankingowas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zawodniks">
+              <PropertyRef Name="PlayerkId" />
+            </Principal>
+            <Dependent Role="ListaRankingowas">
+              <PropertyRef Name="PlayerkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Tabelas_dbo_Zespols_TeamName">
+          <End Role="Zespols" Type="Self.Zespols" Multiplicity="0..1" />
+          <End Role="Tabelas" Type="Self.Tabelas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zespols">
+              <PropertyRef Name="TeamName" />
+            </Principal>
+            <Dependent Role="Tabelas">
+              <PropertyRef Name="TeamName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Terminarzs_dbo_Zespols_TeamName">
+          <End Role="Zespols" Type="Self.Zespols" Multiplicity="0..1" />
+          <End Role="Terminarzs" Type="Self.Terminarzs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zespols">
+              <PropertyRef Name="TeamName" />
+            </Principal>
+            <Dependent Role="Terminarzs">
+              <PropertyRef Name="TeamName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Zawodniks_dbo_Zespols_TeamName">
+          <End Role="Zespols" Type="Self.Zespols" Multiplicity="0..1" />
+          <End Role="Zawodniks" Type="Self.Zawodniks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zespols">
+              <PropertyRef Name="TeamName" />
+            </Principal>
+            <Dependent Role="Zawodniks">
+              <PropertyRef Name="TeamName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBaseModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaRankingowas" EntityType="Self.ListaRankingowas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tabelas" EntityType="Self.Tabelas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Terminarzs" EntityType="Self.Terminarzs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zawodniks" EntityType="Self.Zawodniks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zespols" EntityType="Self.Zespols" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_ListaRankingowas_dbo_Zawodniks_PlayerkId" Association="Self.FK_dbo_ListaRankingowas_dbo_Zawodniks_PlayerkId">
+            <End Role="Zawodniks" EntitySet="Zawodniks" />
+            <End Role="ListaRankingowas" EntitySet="ListaRankingowas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Tabelas_dbo_Zespols_TeamName" Association="Self.FK_dbo_Tabelas_dbo_Zespols_TeamName">
+            <End Role="Zespols" EntitySet="Zespols" />
+            <End Role="Tabelas" EntitySet="Tabelas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Terminarzs_dbo_Zespols_TeamName" Association="Self.FK_dbo_Terminarzs_dbo_Zespols_TeamName">
+            <End Role="Zespols" EntitySet="Zespols" />
+            <End Role="Terminarzs" EntitySet="Terminarzs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Zawodniks_dbo_Zespols_TeamName" Association="Self.FK_dbo_Zawodniks_dbo_Zespols_TeamName">
+            <End Role="Zespols" EntitySet="Zespols" />
+            <End Role="Zawodniks" EntitySet="Zawodniks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="LoginId" />
+          </Key>
+          <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListaRankingowas">
+          <Key>
+            <PropertyRef Name="ListarankingowaId" />
+          </Key>
+          <Property Name="ListarankingowaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Punkty" Type="Int32" Nullable="false" />
+          <Property Name="PlayerkId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Zawodniks" Relationship="Self.FK_dbo_ListaRankingowas_dbo_Zawodniks_PlayerkId" FromRole="ListaRankingowas" ToRole="Zawodniks" />
+        </EntityType>
+        <EntityType Name="Tabelas">
+          <Key>
+            <PropertyRef Name="TableId" />
+          </Key>
+          <Property Name="TableId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rozegrano" Type="Int32" Nullable="false" />
+          <Property Name="Wygrane" Type="Int32" Nullable="false" />
+          <Property Name="Zremisowane" Type="Int32" Nullable="false" />
+          <Property Name="Przegrane" Type="Int32" Nullable="false" />
+          <Property Name="Punkty" Type="Int32" Nullable="false" />
+          <Property Name="TeamName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Zespols" Relationship="Self.FK_dbo_Tabelas_dbo_Zespols_TeamName" FromRole="Tabelas" ToRole="Zespols" />
+        </EntityType>
+        <EntityType Name="Terminarzs">
+          <Key>
+            <PropertyRef Name="Id_terminarz" />
+          </Key>
+          <Property Name="Id_terminarz" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Wynik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TeamName1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Zespols" Relationship="Self.FK_dbo_Terminarzs_dbo_Zespols_TeamName" FromRole="Terminarzs" ToRole="Zespols" />
+        </EntityType>
+        <EntityType Name="Zawodniks">
+          <Key>
+            <PropertyRef Name="PlayerkId" />
+          </Key>
+          <Property Name="PlayerkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nazwisko" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Wygrane" Type="Int32" Nullable="false" />
+          <Property Name="Przegrane" Type="Int32" Nullable="false" />
+          <Property Name="TeamName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ListaRankingowas" Relationship="Self.FK_dbo_ListaRankingowas_dbo_Zawodniks_PlayerkId" FromRole="Zawodniks" ToRole="ListaRankingowas" />
+          <NavigationProperty Name="Zespols" Relationship="Self.FK_dbo_Zawodniks_dbo_Zespols_TeamName" FromRole="Zawodniks" ToRole="Zespols" />
+        </EntityType>
+        <EntityType Name="Zespols">
+          <Key>
+            <PropertyRef Name="TeamName" />
+          </Key>
+          <Property Name="TeamName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Klub" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ulica" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tabelas" Relationship="Self.FK_dbo_Tabelas_dbo_Zespols_TeamName" FromRole="Zespols" ToRole="Tabelas" />
+          <NavigationProperty Name="Terminarzs" Relationship="Self.FK_dbo_Terminarzs_dbo_Zespols_TeamName" FromRole="Zespols" ToRole="Terminarzs" />
+          <NavigationProperty Name="Zawodniks" Relationship="Self.FK_dbo_Zawodniks_dbo_Zespols_TeamName" FromRole="Zespols" ToRole="Zawodniks" />
+        </EntityType>
+        <Association Name="FK_dbo_ListaRankingowas_dbo_Zawodniks_PlayerkId">
+          <End Role="Zawodniks" Type="Self.Zawodniks" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ListaRankingowas" Type="Self.ListaRankingowas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zawodniks">
+              <PropertyRef Name="PlayerkId" />
+            </Principal>
+            <Dependent Role="ListaRankingowas">
+              <PropertyRef Name="PlayerkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Tabelas_dbo_Zespols_TeamName">
+          <End Role="Zespols" Type="Self.Zespols" Multiplicity="0..1" />
+          <End Role="Tabelas" Type="Self.Tabelas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zespols">
+              <PropertyRef Name="TeamName" />
+            </Principal>
+            <Dependent Role="Tabelas">
+              <PropertyRef Name="TeamName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Terminarzs_dbo_Zespols_TeamName">
+          <End Role="Zespols" Type="Self.Zespols" Multiplicity="0..1" />
+          <End Role="Terminarzs" Type="Self.Terminarzs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zespols">
+              <PropertyRef Name="TeamName" />
+            </Principal>
+            <Dependent Role="Terminarzs">
+              <PropertyRef Name="TeamName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Zawodniks_dbo_Zespols_TeamName">
+          <End Role="Zespols" Type="Self.Zespols" Multiplicity="0..1" />
+          <End Role="Zawodniks" Type="Self.Zawodniks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zespols">
+              <PropertyRef Name="TeamName" />
+            </Principal>
+            <Dependent Role="Zawodniks">
+              <PropertyRef Name="TeamName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" />
+          <EntitySet Name="ListaRankingowas" EntityType="Self.ListaRankingowas" />
+          <EntitySet Name="Tabelas" EntityType="Self.Tabelas" />
+          <EntitySet Name="Terminarzs" EntityType="Self.Terminarzs" />
+          <EntitySet Name="Zawodniks" EntityType="Self.Zawodniks" />
+          <EntitySet Name="Zespols" EntityType="Self.Zespols" />
+          <AssociationSet Name="FK_dbo_ListaRankingowas_dbo_Zawodniks_PlayerkId" Association="Self.FK_dbo_ListaRankingowas_dbo_Zawodniks_PlayerkId">
+            <End Role="Zawodniks" EntitySet="Zawodniks" />
+            <End Role="ListaRankingowas" EntitySet="ListaRankingowas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Tabelas_dbo_Zespols_TeamName" Association="Self.FK_dbo_Tabelas_dbo_Zespols_TeamName">
+            <End Role="Zespols" EntitySet="Zespols" />
+            <End Role="Tabelas" EntitySet="Tabelas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Terminarzs_dbo_Zespols_TeamName" Association="Self.FK_dbo_Terminarzs_dbo_Zespols_TeamName">
+            <End Role="Zespols" EntitySet="Zespols" />
+            <End Role="Terminarzs" EntitySet="Terminarzs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Zawodniks_dbo_Zespols_TeamName" Association="Self.FK_dbo_Zawodniks_dbo_Zespols_TeamName">
+            <End Role="Zespols" EntitySet="Zespols" />
+            <End Role="Zawodniks" EntitySet="Zawodniks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBaseModelStoreContainer" CdmEntityContainer="DBaseEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="DBaseModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="DBaseModel.Accounts">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaRankingowas">
+            <EntityTypeMapping TypeName="DBaseModel.ListaRankingowas">
+              <MappingFragment StoreEntitySet="ListaRankingowas">
+                <ScalarProperty Name="ListarankingowaId" ColumnName="ListarankingowaId" />
+                <ScalarProperty Name="Punkty" ColumnName="Punkty" />
+                <ScalarProperty Name="PlayerkId" ColumnName="PlayerkId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tabelas">
+            <EntityTypeMapping TypeName="DBaseModel.Tabelas">
+              <MappingFragment StoreEntitySet="Tabelas">
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="Rozegrano" ColumnName="Rozegrano" />
+                <ScalarProperty Name="Wygrane" ColumnName="Wygrane" />
+                <ScalarProperty Name="Zremisowane" ColumnName="Zremisowane" />
+                <ScalarProperty Name="Przegrane" ColumnName="Przegrane" />
+                <ScalarProperty Name="Punkty" ColumnName="Punkty" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Terminarzs">
+            <EntityTypeMapping TypeName="DBaseModel.Terminarzs">
+              <MappingFragment StoreEntitySet="Terminarzs">
+                <ScalarProperty Name="Id_terminarz" ColumnName="Id_terminarz" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="Wynik" ColumnName="Wynik" />
+                <ScalarProperty Name="TeamName1" ColumnName="TeamName1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zawodniks">
+            <EntityTypeMapping TypeName="DBaseModel.Zawodniks">
+              <MappingFragment StoreEntitySet="Zawodniks">
+                <ScalarProperty Name="PlayerkId" ColumnName="PlayerkId" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Wygrane" ColumnName="Wygrane" />
+                <ScalarProperty Name="Przegrane" ColumnName="Przegrane" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zespols">
+            <EntityTypeMapping TypeName="DBaseModel.Zespols">
+              <MappingFragment StoreEntitySet="Zespols">
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="Klub" ColumnName="Klub" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

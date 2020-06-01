@@ -1,0 +1,54 @@
+﻿@model PingPong7.Models.Zespol
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<h3>Czy na pewno usunąc ten element?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Klub)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Klub)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ulica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ulica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

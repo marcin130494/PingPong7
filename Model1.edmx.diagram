@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5171c57654b44115963ebfa40230b9f2" Name="Diagram1">
+        <EntityTypeShape EntityType="DBaseModel.ListaRankingowas" Width="1.5" PointX="9.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBaseModel.Tabelas" Width="1.5" PointX="2.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBaseModel.Terminarzs" Width="1.5" PointX="2.375" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBaseModel.Zawodniks" Width="1.5" PointX="7.125" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBaseModel.Zespols" Width="1.5" PointX="4.625" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="DBaseModel.FK_dbo_ListaRankingowas_dbo_Zawodniks_PlayerkId" ManuallyRouted="false" />
+        <AssociationConnector Association="DBaseModel.FK_dbo_Tabelas_dbo_Zespols_TeamName" ManuallyRouted="false" />
+        <AssociationConnector Association="DBaseModel.FK_dbo_Terminarzs_dbo_Zespols_TeamName" ManuallyRouted="false" />
+        <AssociationConnector Association="DBaseModel.FK_dbo_Zawodniks_dbo_Zespols_TeamName" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

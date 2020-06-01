@@ -1,0 +1,57 @@
+﻿@model IEnumerable<PingPong7.Models.Zawodnik>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br>
+<br>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Zespol.Klub)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Imie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nazwisko)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Wygrane)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Przegrane)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Zespol.Klub)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Imie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nazwisko)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Wygrane)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Przegrane)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PlayerkId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PlayerkId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PlayerkId })
+        </td>
+    </tr>
+}
+
+</table>
+<p style="text-align: right">
+    @Html.ActionLink("Create New", "Create")
+</p>

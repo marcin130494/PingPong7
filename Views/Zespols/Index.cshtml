@@ -1,0 +1,52 @@
+﻿@model IEnumerable<PingPong7.Models.Zespol>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br>
+<br>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Klub)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ulica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Klub)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ulica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TeamName }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TeamName }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TeamName })
+        </td>
+    </tr>
+}
+
+</table>
+
+<p style="text-align: right">
+    @Html.ActionLink("Create New", "Create")
+</p>

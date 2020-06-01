@@ -1,0 +1,63 @@
+﻿@model PingPong7.Models.Zawodnik
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Czy na pewno chcesz usunąć ten element?</h3>
+<div>
+     <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Drużyna")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwisko)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwisko)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Wygrane)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wygrane)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Przegrane)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Przegrane)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

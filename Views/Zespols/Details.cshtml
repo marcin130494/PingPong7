@@ -1,0 +1,47 @@
+﻿@model PingPong7.Models.Zespol
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Klub)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Klub)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ulica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ulica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TeamName }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

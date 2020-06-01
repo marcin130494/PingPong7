@@ -1,0 +1,64 @@
+﻿@model PingPong7.Models.Tabela
+
+    @{
+        ViewBag.Title = "Details";
+    }
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayName("Druzyna")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rozegrano)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rozegrano)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Wygrane)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wygrane)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zremisowane)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zremisowane)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Przegrane)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Przegrane)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Punkty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Punkty)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TableId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
